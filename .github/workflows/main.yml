@@ -1,0 +1,45 @@
+# to get here go to Actions -> creat own workflow
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+# need to have at least one job
+# tests is a dictioary
+# start up a job named tests
+# have to pick a runner (just google - ours is called ubuntu-latest:)
+# look at actions/checkout on github
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      # FIRST ACTION: Checkout your Code
+      - uses: actions/checkout@v3
+      
+      # SECOND ACTION: Find the version of python you want it to run on
+      # Going to do python testing so might want to install python
+      # will try to use a prebuild version of python, or will go find one for you from some cache
+      # when you setup python it also activates it
+      - uses: actions/setup-python@v4
+        # another key - actions have another with dictiony where you pass stuff to it
+        with: 
+          python-version: "3.11"
+
+      # THIRD ACTION: 
+      # either has a uses or a run - will have a run
+      # dashes are important 
+      # look at pyyaml -> converts this to python
+      # converts from yaml -> json (yaml is just a superset of yson)
+      - name: Install package and test requirements 
+        run: python -m pip install .[test]
+      
+      - run: python -m pytest
+      
+      
+      
+      
+      
+      
+      
+      
