@@ -13,8 +13,19 @@ concurrency:
   cancel-in-progress: true
   # will wait until one run down, 
   
-
-
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+          # This is now a code that checks out your code, runs via python, etc... 
+      - uses: pre-commit/pre-commit-action@v3.0.0
+      
+  
 
 # need to have at least one job
 # tests is a dictioary
