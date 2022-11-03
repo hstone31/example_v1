@@ -1,0 +1,30 @@
+name: CD
+
+# New File haflway thorugh class on Thurs Nov 3
+
+on:
+  # dispatch will allow us to click a button that 
+  workflow_dispatch: 
+  releases:
+    types: 
+      - publish
+ 
+ jobs:
+  # Can make it one job or wo
+  build:
+    # One key that is required in all jobs?
+    # one other is steps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # have to check it out as we have to build it
+      
+      - runs: pipx run build
+      
+      # Take files that you created that build makes
+      # build puts it into build/dist
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist/*
+          
+    
