@@ -1,9 +1,20 @@
+name: CI
+
 # to get here go to Actions -> creat own workflow
 on:
   pull_request:
   push:
     branches:
       - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # github.workflow is just CI
+  cancel-in-progress: true
+  # will wait until one run down, 
+  
+
+
 
 # need to have at least one job
 # tests is a dictioary
